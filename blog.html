@@ -1,14 +1,36 @@
 ---
-layout: default
-title: My Blog
+layout: blog_base
+title: Blog
+is_blog_index: true
 ---
+<div class="row" id="posts-grid">
+    {% for post in site.posts %}
+    <!-- Post Item -->
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 post-item" data-categories="{{ post.categories | join: ' ' | downcase }}">
+        
+        <div class="tm-content-box tm-margin-b-30">
+            {% if post.image %}
+                <!-- Optional Image -->
+                <img src="{{ post.image | relative_url }}" alt="Image" class="tm-margin-b-20 img-fluid" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+            {% else %}
+                <!-- Default Image -->
+                <img src="{{ '/img/tm-img-310x180-1.jpg' | relative_url }}" alt="Image" class="tm-margin-b-20 img-fluid" style="width: 100%; aspect-ratio: 16/9; object-fit: cover;">
+            {% endif %}
+            
+            <a href="{{ post.url | relative_url }}" class="tm-text-link"><h4 class="tm-margin-b-20 tm-gold-text" style="font-size: 1.25rem; min-height: 48px;">{{ post.title }}</h4></a>
+            
+            <!-- 2 lines of text -->
+            <p class="tm-margin-b-20" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                {{ post.excerpt | strip_html }}
+            </p>
+            
+            <a href="{{ post.url | relative_url }}" class="tm-btn text-uppercase">Read More</a>    
+        </div>  
 
-<h2>Latest Articles</h2>
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a> 
-      <span>({{ post.date | date: "%b %-d, %Y" }})</span>
-    </li>
-  {% endfor %}
-</ul>
+    </div>
+    {% else %}
+    <div class="col-xs-12">
+        <p>No posts found. Start by adding a post to the <code>_posts</code> directory!</p>
+    </div>
+    {% endfor %}
+</div>

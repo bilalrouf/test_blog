@@ -1,11 +1,23 @@
 ---
-layout: default
+layout: blog_base
 ---
-<article>
-  <h1>{{ page.title }}</h1>
-  <p class="meta">{{ page.date | date: "%B %-d, %Y" }}</p>
-
-  <div class="post-content">
-    {{ content }}
+<article class="post">
+  <!-- Post title -->
+  <h2 class="tm-gold-text tm-margin-b-20">{{ page.title }}</h2>
+  
+  <!-- Post date -->
+  <p class="tm-margin-b-30"><em>{{ page.date | date: "%B %-d, %Y" }}</em></p>
+  
+  <!-- Post image -->
+  {% if page.image %}
+      <!-- Post optional image -->
+      <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="tm-margin-b-30 img-fluid" style="width: 100%; height: auto; max-height: 500px; object-fit: cover;">
+  {% endif %}
+  
+  <!-- Post content -->
+  <div class="post-content tm-margin-b-30">
+      {{ content }}
   </div>
+
+  <a href="{{ '/blog.html' | relative_url }}" class="tm-btn text-uppercase">Back to Blog</a>
 </article>
